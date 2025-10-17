@@ -1,0 +1,36 @@
+{
+  "modes": [
+    {
+      "name": "Kanji",
+      "groups": [
+        {
+          "name": "N5",
+          "quizzes": [
+            {
+              "name": "Group 1",
+              "questions": {
+                "水": "water",
+                "火": "fire"
+              }
+            },
+            {
+              "name": "Group 2",
+              "questions": {
+                "山": "mountain",
+                "川": "river"
+              }
+            }
+          ]
+        },
+        {
+          "name": "N4",
+          "quizzes": []
+        }
+      ]
+    },
+    {
+      "name": "Conjunctions",
+      "groups": []
+    }
+  ]
+}
