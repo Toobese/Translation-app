@@ -2,6 +2,7 @@ package com.example.translationapp
 
 import GroupGrid
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -31,6 +32,7 @@ import com.example.translationapp.viewmodel.TranslationData
 @Composable
 fun ModeGrid(
     modes: TranslationData,
+    onModeClick: (String) -> Unit
 ) {
     LazyVerticalGrid(
         columns = GridCells.Fixed(1),
@@ -52,7 +54,8 @@ fun ModeGrid(
             Surface(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(130.dp),
+                    .height(130.dp)
+                    .clickable { onModeClick(mode.name) },
                 shape = RoundedCornerShape(20.dp),
                 color = Color(0xFF1E1E1E),
                 border = BorderStroke(1.dp, Color(0xFF2C2C2C))

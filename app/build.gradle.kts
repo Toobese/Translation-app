@@ -53,4 +53,6 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.test.manifest)
     implementation(libs.gson)
     implementation(libs.androidx.compose.foundation)
+    implementation(libs.accompanist.systemuicontroller)
+    implementation(libs.androidx.navigation.compose)
 }
