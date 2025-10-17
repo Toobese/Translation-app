@@ -25,11 +25,31 @@
         {
           "name": "N4",
           "quizzes": []
+        },
+        {
+          "name": "N3",
+          "quizzes": []
+        },
+        {
+          "name": "N2",
+          "quizzes": []
+        },
+        {
+          "name": "N1",
+          "quizzes": []
         }
       ]
     },
     {
       "name": "Conjunctions",
+      "groups": []
+    },
+    {
+      "name": "News Segments",
+      "groups": []
+    },
+    {
+      "name": "Names",
       "groups": []
     }
   ]

@@ -24,7 +24,7 @@ fun TopBar(
             .fillMaxWidth()
             .height(180.dp),
         shape = RoundedCornerShape(24.dp),
-        color = Color(0xFF4B0082)
+        color = MaterialTheme.colorScheme.onPrimaryContainer
     ) {
         Box(
             modifier = Modifier.fillMaxSize(),
