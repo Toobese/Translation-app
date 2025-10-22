@@ -2,55 +2,56 @@
   "modes": [
     {
       "name": "Kanji",
-      "groups": [
+      "quizzes": [
         {
-          "name": "N5",
-          "quizzes": [
+          "name": "Group 1",
+          "highScore": 1.00,
+          "wordList": [
             {
-              "name": "Group 1",
-              "questions": {
-                "水": "water",
-                "火": "fire"
-              }
+              "question": "水",
+              "answer": "water",
+              "mnemonic": "Looks like flowing water.",
+              "radicals": "氵 (water radical)"
             },
             {
-              "name": "Group 2",
-              "questions": {
-                "山": "mountain",
-                "川": "river"
-              }
+              "question": "火",
+              "answer": "fire",
+              "mnemonic": "Looks like a flickering flame.",
+              "radicals": "火 (fire radical)"
             }
           ]
         },
         {
-          "name": "N4",
-          "quizzes": []
-        },
-        {
-          "name": "N3",
-          "quizzes": []
-        },
-        {
-          "name": "N2",
-          "quizzes": []
-        },
-        {
-          "name": "N1",
-          "quizzes": []
+          "name": "Group 2",
+          "highScore": 0.00,
+          "wordList": [
+            {
+              "question": "山",
+              "answer": "mountain",
+              "mnemonic": "Three peaks of a mountain.",
+              "radicals": "山 (mountain radical)"
+            },
+            {
+              "question": "川",
+              "answer": "river",
+              "mnemonic": "Three lines for flowing streams.",
+              "radicals": "川 (river radical)"
+            }
+          ]
         }
       ]
     },
     {
       "name": "Conjunctions",
-      "groups": []
+      "quizzes": []
     },
     {
       "name": "News Segments",
-      "groups": []
+      "quizzes": []
     },
     {
       "name": "Names",
-      "groups": []
+      "quizzes": []
     }
   ]
 }

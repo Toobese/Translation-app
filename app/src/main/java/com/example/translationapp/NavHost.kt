@@ -7,7 +7,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.navigation.NavType
 import androidx.navigation.compose.*
 import androidx.navigation.navArgument
+import com.example.translationapp.domain.model.Mode
 import com.example.translationapp.viewmodel.QuizSelectionViewModel
+import com.google.gson.Gson
 
 @Composable
 fun AppNavHost(
@@ -34,18 +36,19 @@ fun AppNavHost(
             composable("home") {
                 ModeSelectionContent(
                     viewModel = viewModel,
-                    onModeClick = { modeName ->
-                        navController.navigate("modeSelectionContent/$modeName")
+                    onModeClick = { modeJson ->
+                        navController.navigate("quizSelection/$modeJson")
                     }
                 )
             }
 
             composable(
-                route = "modeSelectionContent/{modeName}",
-                arguments = listOf(navArgument("modeName") { type = NavType.StringType })
+                route = "quizSelection/{modeJson}",
+                arguments = listOf(navArgument("modeJson") { type = NavType.StringType })
             ) { backStackEntry ->
-                val modeName = backStackEntry.arguments?.getString("modeName") ?: ""
-                GroupSelectionScreen(modeName = modeName, onBack = onBack)
+                val modeJson = backStackEntry.arguments?.getString("modeJson")
+                val mode = Gson().fromJson(modeJson, Mode::class.java)
+                QuizSelectionScreen(mode = mode, onBack = onBack)
             }
         }
     }

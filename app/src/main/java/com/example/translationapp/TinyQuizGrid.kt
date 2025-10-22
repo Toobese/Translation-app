@@ -14,7 +14,7 @@ import androidx.compose.ui.unit.sp
 import com.example.translationapp.domain.model.Mode
 
 @Composable
-fun GroupGrid(
+fun TinyQuizGrid(
     mode: Mode,
 ) {
     val scrollState = rememberScrollState()
@@ -27,7 +27,7 @@ fun GroupGrid(
         horizontalArrangement = Arrangement.spacedBy(8.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        mode.groups.forEach { group ->
+        mode.quizzes.forEach { quiz ->
             Surface(
                 modifier = Modifier
                     .height(28.dp)
@@ -41,7 +41,7 @@ fun GroupGrid(
                     contentAlignment = Alignment.Center
                 ) {
                     Text(
-                        text = group.name,
+                        text = quiz.name,
                         fontSize = 14.sp,
                         fontWeight = FontWeight.Medium,
                         color = Color(0xFFE0E0E0)

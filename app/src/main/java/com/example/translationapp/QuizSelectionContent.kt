@@ -2,14 +2,12 @@ package com.example.translationapp
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -22,9 +20,10 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.translationapp.domain.model.Mode
 
 @Composable
-fun GroupSelectionScreen(modeName: String, onBack: () -> Unit) {
+fun QuizSelectionScreen(mode: Mode, onBack: () -> Unit) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -50,7 +49,7 @@ fun GroupSelectionScreen(modeName: String, onBack: () -> Unit) {
             }
 
             Text(
-                text = modeName.uppercase(),
+                text = mode.name.uppercase(),
                 style = MaterialTheme.typography.displayMedium,
                 fontWeight = FontWeight.Bold,
                 color = Color(0xFFE8D9FF)
@@ -59,10 +58,6 @@ fun GroupSelectionScreen(modeName: String, onBack: () -> Unit) {
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        Text(
-            text = "Groups for $modeName will appear here",
-            color = Color(0xFFB0AEB6),
-            fontSize = 16.sp
-        )
+        QuizGrid(quizzes = mode.quizzes)
     }
 }
