@@ -86,7 +86,7 @@ fun ModeGrid(
                     ) {
                         Text(
                             text = mode.name.uppercase(),
-                            fontSize = 18.sp,
+                            fontSize = 22.sp,
                             fontWeight = FontWeight.Bold,
                             color = Color(0xFFEDE7F6)
                         )
