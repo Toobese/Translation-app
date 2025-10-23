@@ -34,7 +34,7 @@ import com.google.gson.Gson
 @Composable
 fun ModeGrid(
     modes: TranslationData,
-    onModeClick: (String) -> Unit
+    onModeClick: (String) -> Unit,
 ) {
     LazyVerticalGrid(
         columns = GridCells.Fixed(1),
@@ -59,8 +59,7 @@ fun ModeGrid(
                     .height(130.dp)
                     .clickable {
                         val modeJson = Uri.encode(Gson().toJson(mode))
-                        onModeClick(modeJson)
-                               },
+                        onModeClick(modeJson) },
                 shape = RoundedCornerShape(20.dp),
                 color = Color(0xFF1E1E1E),
                 border = BorderStroke(1.dp, Color(0xFF2C2C2C))

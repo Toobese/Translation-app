@@ -1,8 +1,10 @@
 package com.example.translationapp
 
+import android.net.Uri
 import com.example.translationapp.domain.model.Quiz
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -24,10 +26,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.translationapp.ui.components.ScoreDisplay
+import com.google.gson.Gson
 
 @Composable
 fun QuizGrid(
-    quizzes: List<Quiz>
+    quizzes: List<Quiz>,
+    onQuizClick: (String) -> Unit,
 ) {
     LazyVerticalGrid(
         columns = GridCells.Fixed(1),
@@ -41,8 +45,10 @@ fun QuizGrid(
             Surface(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(90.dp),
-//                    .clickable { onModeClick(mode.name) },
+                    .height(90.dp)
+                    .clickable {
+                        val quizJson = Uri.encode(Gson().toJson(quiz))
+                        onQuizClick(quizJson) },
                 shape = RoundedCornerShape(20.dp),
                 color = Color(0xFF1E1E1E),
                 border = BorderStroke(1.dp, Color(0xFF2C2C2C))

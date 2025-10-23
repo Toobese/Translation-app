@@ -22,7 +22,7 @@ import androidx.compose.ui.unit.dp
 import com.example.translationapp.domain.model.Mode
 
 @Composable
-fun QuizSelectionScreen(mode: Mode, onBack: () -> Unit) {
+fun QuizSelectionScreen(mode: Mode, onBack: () -> Unit, onQuizClick: (String) -> Unit) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -57,6 +57,6 @@ fun QuizSelectionScreen(mode: Mode, onBack: () -> Unit) {
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        QuizGrid(quizzes = mode.quizzes)
+        QuizGrid(quizzes = mode.quizzes, onQuizClick = onQuizClick)
     }
 }

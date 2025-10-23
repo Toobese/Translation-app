@@ -8,6 +8,7 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.*
 import androidx.navigation.navArgument
 import com.example.translationapp.domain.model.Mode
+import com.example.translationapp.domain.model.Quiz
 import com.example.translationapp.viewmodel.QuizSelectionViewModel
 import com.google.gson.Gson
 
@@ -48,7 +49,22 @@ fun AppNavHost(
             ) { backStackEntry ->
                 val modeJson = backStackEntry.arguments?.getString("modeJson")
                 val mode = Gson().fromJson(modeJson, Mode::class.java)
-                QuizSelectionScreen(mode = mode, onBack = onBack)
+                QuizSelectionScreen(
+                    mode = mode,
+                    onBack = onBack,
+                    onQuizClick = { quizJson ->
+                    navController.navigate("quizScreen/$quizJson")
+                    }
+                )
+            }
+
+            composable(
+                route = "quizScreen/{quizJson}",
+                arguments = listOf(navArgument("quizJson") { type = NavType.StringType })
+                ) { backStackEntry ->
+                val quizJson = backStackEntry.arguments?.getString("quizJson")
+                val quiz = Gson().fromJson(quizJson, Quiz::class.java)
+                QuizScreen(quiz = quiz, onBack = onBack)
             }
         }
     }
