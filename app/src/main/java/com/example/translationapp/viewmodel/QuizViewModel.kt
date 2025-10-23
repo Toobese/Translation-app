@@ -27,7 +27,9 @@ class QuizViewModel(quiz: Quiz) : ViewModel() {
 
     fun pickRandomWord() { if (remainingWords.isNotEmpty()) currentWord.value = remainingWords.random() else currentWord.value = null }
 
-    fun onInputChange(newValue: String) { userInput.value = newValue }
+    fun onInputChange(newValue: Char) { userInput.value += newValue }
+
+    fun onBackSpace() { userInput.value = userInput.value.dropLast(1)  }
 
     fun checkAnswer() {
         val word = currentWord.value ?: return

@@ -59,30 +59,28 @@ fun QuizScreen(quiz: Quiz, onBack: () -> Unit) {
 
                 Spacer(modifier = Modifier.height(40.dp))
 
-                // 🌸 Make the input wider and visually centered
                 OutlinedTextField(
                     value = userInput,
                     onValueChange = {},
-                    readOnly = false,
+                    readOnly = true,
                     label = { Text("Your answer") },
                     textStyle = MaterialTheme.typography.bodyLarge,
                     singleLine = true,
                     modifier = Modifier
-                        .fillMaxWidth(0.9f) // wider field (90% of screen)
+                        .fillMaxWidth()
                         .height(60.dp),
                     colors = OutlinedTextFieldDefaults.colors(
                         focusedBorderColor = Color(0xFFB388FF),
-                        unfocusedBorderColor = Color(0xFFB0AEB6),
+                        unfocusedBorderColor = Color(0xFFB388FF),
                         focusedLabelColor = Color(0xFFB388FF),
-                        unfocusedLabelColor = Color(0xFFB0AEB6),
+                        unfocusedLabelColor = Color(0xFFB388FF),
                         cursorColor = Color(0xFFB388FF),
                         focusedTextColor = Color(0xFFB388FF),
-                        unfocusedTextColor = Color(0xFFE8D9FF)
+                        unfocusedTextColor = Color(0xFFB388FF)
                     )
                 )
 
             } else {
-                // 🎉 Quiz finished
                 Text(
                     text = "Quiz Complete!",
                     style = MaterialTheme.typography.headlineMedium,
@@ -106,6 +104,6 @@ fun QuizScreen(quiz: Quiz, onBack: () -> Unit) {
                 }
             }
         }
-        Keyboard()
+        Keyboard(onKeyPress = viewModel::onInputChange, onBackSpace = viewModel::onBackSpace, onSubmit = viewModel::checkAnswer)
     }
 }

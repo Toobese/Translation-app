@@ -21,7 +21,7 @@ import androidx.compose.ui.unit.sp
 @Composable
 fun Keyboard(
     onKeyPress: (Char) -> Unit = {},
-    onBackspace: () -> Unit = {},
+    onBackSpace: () -> Unit = {},
     onSubmit: () -> Unit = {}
 ) {
     val letterRows = listOf(
@@ -46,11 +46,10 @@ fun Keyboard(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         letterRows.forEachIndexed { index, row ->
-            // Subtle stagger offsets (like real QWERTY)
             val rowOffset = when (index) {
-                1 -> keyWidth / 2.2f      // second row (A) shifts right
-                2 -> keyWidth * 1.1f      // third row (Z) shifts more
-                3 -> 0.dp                 // bottom stays centered
+                1 -> keyWidth / 2.2f
+                2 -> keyWidth * 1.1f
+                3 -> 0.dp
                 else -> 0.dp
             }
 
@@ -74,7 +73,7 @@ fun Keyboard(
                         keyWidth = width,
                         keyHeight = keyHeight,
                         onClick = when (key) {
-                            '←' -> onBackspace
+                            '←' -> onBackSpace
                             '✓' -> onSubmit
                             else -> { { onKeyPress(key) } }
                         }
