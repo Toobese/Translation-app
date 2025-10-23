@@ -8,6 +8,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.example.translationapp.composables.AnswerBox
+import com.example.translationapp.composables.AnswerCard
+import com.example.translationapp.composables.ProgressBar
+import com.example.translationapp.composables.TopBar
 import com.example.translationapp.domain.model.Quiz
 import com.example.translationapp.ui.common.Keyboard
 import com.example.translationapp.viewmodel.QuizViewModel
@@ -23,63 +28,31 @@ fun QuizScreen(quiz: Quiz, onBack: () -> Unit) {
     Column(
         modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.SpaceBetween,
+        verticalArrangement = Arrangement.Top,
     ) {
+        Spacer(modifier = Modifier.height(48.dp))
+        TopBar(text = quiz.name, onBack = onBack)
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 20.dp, vertical = 24.dp),
+                .padding(horizontal = 24.dp, vertical = 24.dp)
+                .padding(top = 24.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            // 🔙 Back button
-            TextButton(onClick = onBack, modifier = Modifier.align(Alignment.Start)) {
-                Text("← Back", color = Color(0xFFE8D9FF))
-            }
-
-            Spacer(modifier = Modifier.height(24.dp))
-
-            LinearProgressIndicator(
-                progress = { progress },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(6.dp),
-                color = Color(0xFFB388FF),
-                trackColor = ProgressIndicatorDefaults.linearTrackColor,
-                strokeCap = ProgressIndicatorDefaults.LinearStrokeCap,
-            )
-
+            ProgressBar(progress)
             Spacer(modifier = Modifier.height(40.dp))
 
             if (currentWord != null) {
                 Text(
                     text = currentWord.question,
+                    fontSize = 50.sp,
                     style = MaterialTheme.typography.displaySmall,
                     color = Color(0xFFB388FF)
                 )
-
                 Spacer(modifier = Modifier.height(40.dp))
-
-                OutlinedTextField(
-                    value = userInput,
-                    onValueChange = {},
-                    readOnly = true,
-                    label = { Text("Your answer") },
-                    textStyle = MaterialTheme.typography.bodyLarge,
-                    singleLine = true,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(60.dp),
-                    colors = OutlinedTextFieldDefaults.colors(
-                        focusedBorderColor = Color(0xFFB388FF),
-                        unfocusedBorderColor = Color(0xFFB388FF),
-                        focusedLabelColor = Color(0xFFB388FF),
-                        unfocusedLabelColor = Color(0xFFB388FF),
-                        cursorColor = Color(0xFFB388FF),
-                        focusedTextColor = Color(0xFFB388FF),
-                        unfocusedTextColor = Color(0xFFB388FF)
-                    )
-                )
-
+                AnswerBox(userInput)
+                Spacer(modifier = Modifier.height(40.dp))
+                AnswerCard(viewModel.previousWord.value, viewModel.wasCorrect.value)
             } else {
                 Text(
                     text = "Quiz Complete!",

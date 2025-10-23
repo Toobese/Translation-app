@@ -46,17 +46,8 @@ fun Keyboard(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         letterRows.forEachIndexed { index, row ->
-            val rowOffset = when (index) {
-                1 -> keyWidth / 2.2f
-                2 -> keyWidth * 1.1f
-                3 -> 0.dp
-                else -> 0.dp
-            }
-
             Row(
-                modifier = Modifier
-                    .padding(start = rowOffset)
-                    .wrapContentWidth(),
+                modifier = Modifier.wrapContentWidth(),
                 horizontalArrangement = Arrangement.spacedBy(horizontalSpacing),
                 verticalAlignment = Alignment.CenterVertically
             ) {

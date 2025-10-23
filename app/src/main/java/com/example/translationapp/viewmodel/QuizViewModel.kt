@@ -14,21 +14,17 @@ class QuizViewModel(quiz: Quiz) : ViewModel() {
     var correctCount = mutableIntStateOf(0)
     var totalCount = allWords.size
     var currentWord = mutableStateOf<Word?>(null)
-    var showAnswer = mutableStateOf<Boolean>(false)
+    var previousWord = mutableStateOf<Word?>(null)
+    var wasCorrect = mutableStateOf(false)
 
     val progress: Float
         get() = if (totalCount > 0)
             correctCount.intValue.toFloat() / totalCount
         else 0f
 
-    init {
-        pickRandomWord()
-    }
-
+    init { pickRandomWord() }
     fun pickRandomWord() { if (remainingWords.isNotEmpty()) currentWord.value = remainingWords.random() else currentWord.value = null }
-
     fun onInputChange(newValue: Char) { userInput.value += newValue }
-
     fun onBackSpace() { userInput.value = userInput.value.dropLast(1)  }
 
     fun checkAnswer() {
@@ -38,16 +34,20 @@ class QuizViewModel(quiz: Quiz) : ViewModel() {
         if (answer.equals(word.answer, ignoreCase = true)) {
             correctCount.intValue++
             remainingWords.remove(word)
-        }
+            wasCorrect.value = true
+        } else { wasCorrect.value = false }
         userInput.value = ""
-        showAnswer.value = true
+        previousWord.value = currentWord.value
+        currentWord.value = remainingWords.random()
     }
 
     fun autoFillAnswer() {
         val word = currentWord.value ?: return
         correctCount.intValue++
         remainingWords.remove(word)
-        showAnswer.value = true
+        previousWord.value = currentWord.value
+        wasCorrect.value = true
+        currentWord.value = remainingWords.random()
     }
 
     fun resetQuiz() {
@@ -55,6 +55,7 @@ class QuizViewModel(quiz: Quiz) : ViewModel() {
         remainingWords.addAll(allWords)
         correctCount.intValue = 0
         userInput.value = ""
+        previousWord.value = null
         pickRandomWord()
     }
 }
