@@ -15,6 +15,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.translationapp.R
 
 @Composable
@@ -40,6 +41,7 @@ fun TopBar(text: String, onBack: () -> Unit) {
         Text(
             text = text.uppercase(),
             style = MaterialTheme.typography.displayMedium,
+            fontSize = 30.sp,
             fontWeight = FontWeight.Bold,
             color = Color(0xFFE8D9FF)
         )

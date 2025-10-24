@@ -38,7 +38,9 @@ class QuizViewModel(quiz: Quiz) : ViewModel() {
         } else { wasCorrect.value = false }
         userInput.value = ""
         previousWord.value = currentWord.value
-        currentWord.value = remainingWords.random()
+        if (remainingWords.isNotEmpty()) { currentWord.value = remainingWords.random() } else {
+            currentWord.value = null
+        }
     }
 
     fun autoFillAnswer() {

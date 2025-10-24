@@ -77,6 +77,6 @@ fun QuizScreen(quiz: Quiz, onBack: () -> Unit) {
                 }
             }
         }
-        Keyboard(onKeyPress = viewModel::onInputChange, onBackSpace = viewModel::onBackSpace, onSubmit = viewModel::checkAnswer)
+        if (currentWord != null) Keyboard(onKeyPress = viewModel::onInputChange, onBackSpace = viewModel::onBackSpace, onSubmit = viewModel::checkAnswer)
     }
 }

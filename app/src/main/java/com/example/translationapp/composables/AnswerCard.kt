@@ -64,19 +64,21 @@ fun AnswerCard(previousWord: Word?, correct: Boolean) {
                         .padding(top = 6.dp),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    Text(
-                        text = word.mnemonic,
-                        color = Color(0xFFB0AEB6),
-                        fontSize = 14.sp,
-                        lineHeight = 18.sp,
-                        maxLines = 2,
-                        overflow = TextOverflow.Ellipsis
-                    )
+                    previousWord.mnemonic?.let { mnemonic ->
+                        Text(
+                            text = mnemonic,
+                            color = Color(0xFFB0AEB6),
+                            fontSize = 14.sp,
+                            lineHeight = 18.sp,
+                            maxLines = 2,
+                            overflow = TextOverflow.Ellipsis
+                        )
+                    }
 
-                    if (word.radicals.isNotBlank()) {
+                    previousWord.radicals?.let { radicals ->
                         Spacer(modifier = Modifier.height(4.dp))
                         Text(
-                            text = word.radicals,
+                            text = radicals,
                             color = Color(0xFFB0AEB6),
                             fontSize = 13.sp,
                             lineHeight = 16.sp

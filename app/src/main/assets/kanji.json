@@ -52,6 +52,31 @@
     {
       "name": "Names",
       "quizzes": []
+    },
+    {
+      "name": "Grammar",
+      "quizzes": [
+        {
+          "name": "Conjugations 1",
+          "highScore": 0.00,
+          "wordList": [
+          ]
+        },
+        {
+          "name": "Words 1",
+          "highScore": 0.00,
+          "wordList": [
+            {
+              "question": "ので",
+              "answer": "because"
+            },
+            {
+              "question": "ほうがいいです",
+              "answer": "it is better (not)"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
