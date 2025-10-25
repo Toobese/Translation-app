@@ -54,7 +54,7 @@ fun Keyboard(
                 row.forEach { key ->
                     val width = when (key) {
                         ' ' -> keyWidth * 9f
-//                        '←' -> keyWidth * 1.8f
+                        '←' -> keyWidth * 1.8f
                         '✓' -> keyWidth * 1.8f
                         else -> keyWidth
                     }

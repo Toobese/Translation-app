@@ -34,7 +34,7 @@ import com.example.translationapp.domain.model.Word
 import com.google.gson.Gson
 
 @Composable
-fun HistoryCards(words: List<Word>) {
+fun HistoryCards(words: List<Word>, onClickInCorrect: (Word) -> Unit) {
     Column(modifier = Modifier.width(30.dp).fillMaxHeight()) {
         Box(
             modifier = Modifier.width(30.dp),
@@ -56,14 +56,14 @@ fun HistoryCards(words: List<Word>) {
             verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
             items(words) { word ->
-                HistoryCard(word)
+                HistoryCard(word, onClickInCorrect)
             }
         }
     }
 }
 
 @Composable
-fun HistoryCard(word: Word) {
+fun HistoryCard(word: Word, onClickInCorrect: (Word) -> Unit) {
     Surface(
         modifier = Modifier
             .fillMaxWidth()
@@ -73,7 +73,7 @@ fun HistoryCard(word: Word) {
         border = BorderStroke(1.dp, Color(0xFFE53935))
     ) {
         Box(
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier.fillMaxSize().clickable { onClickInCorrect(word) },
             contentAlignment = Alignment.Center
         ) {
             Text(

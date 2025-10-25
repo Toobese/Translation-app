@@ -57,7 +57,7 @@ fun QuizScreen(quiz: Quiz, onBack: () -> Unit) {
                 Row(
                     modifier = Modifier.height(150.dp)
                 ) {
-                    if(viewModel.inCorrectHistory.value.isNotEmpty()) HistoryCards(viewModel.inCorrectHistory.value)
+                    if(viewModel.inCorrectHistory.value.isNotEmpty()) HistoryCards(viewModel.inCorrectHistory.value, viewModel::showInCorrectAnswer)
                     AnswerCard(viewModel.previousWord.value, viewModel.wasCorrect.value)
                 }
             } else {

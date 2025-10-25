@@ -56,6 +56,11 @@ class QuizViewModel(quiz: Quiz) : ViewModel() {
         currentWord.value = remainingWords.random()
     }
 
+    fun showInCorrectAnswer(word: Word) {
+        previousWord.value = word
+        wasCorrect.value = false
+    }
+
     fun resetQuiz() {
         remainingWords.clear()
         remainingWords.addAll(allWords)
