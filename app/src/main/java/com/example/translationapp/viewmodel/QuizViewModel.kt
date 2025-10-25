@@ -7,20 +7,20 @@ import com.example.translationapp.domain.model.Quiz
 import com.example.translationapp.domain.model.Word
 
 class QuizViewModel(quiz: Quiz) : ViewModel() {
-    private val allWords = quiz.wordList + quiz.wordList // each word appears twice
+    private val allWords = quiz.wordList + quiz.wordList
     private val remainingWords = allWords.toMutableList()
 
     var userInput = mutableStateOf("")
     var correctCount = mutableIntStateOf(0)
+    var inCorrectCount = mutableIntStateOf(0)
     var totalCount = allWords.size
     var currentWord = mutableStateOf<Word?>(null)
     var previousWord = mutableStateOf<Word?>(null)
+    var inCorrectHistory = mutableStateOf<List<Word>>(emptyList())
     var wasCorrect = mutableStateOf(false)
 
-    val progress: Float
-        get() = if (totalCount > 0)
-            correctCount.intValue.toFloat() / totalCount
-        else 0f
+    val score: Float get() = correctCount.intValue.toFloat() / (correctCount.intValue.toFloat() + inCorrectCount.intValue.toFloat())
+    val progress: Float get() = if (totalCount > 0) correctCount.intValue.toFloat() / totalCount else 0f
 
     init { pickRandomWord() }
     fun pickRandomWord() { if (remainingWords.isNotEmpty()) currentWord.value = remainingWords.random() else currentWord.value = null }
@@ -35,7 +35,11 @@ class QuizViewModel(quiz: Quiz) : ViewModel() {
             correctCount.intValue++
             remainingWords.remove(word)
             wasCorrect.value = true
-        } else { wasCorrect.value = false }
+        } else {
+            wasCorrect.value = false
+            inCorrectCount.intValue++
+            inCorrectHistory.value += word
+        }
         userInput.value = ""
         previousWord.value = currentWord.value
         if (remainingWords.isNotEmpty()) { currentWord.value = remainingWords.random() } else {

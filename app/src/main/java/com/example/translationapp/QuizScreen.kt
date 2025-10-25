@@ -11,6 +11,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.translationapp.composables.AnswerBox
 import com.example.translationapp.composables.AnswerCard
+import com.example.translationapp.composables.HistoryCards
 import com.example.translationapp.composables.ProgressBar
 import com.example.translationapp.composables.TopBar
 import com.example.translationapp.domain.model.Quiz
@@ -52,7 +53,13 @@ fun QuizScreen(quiz: Quiz, onBack: () -> Unit) {
                 Spacer(modifier = Modifier.height(40.dp))
                 AnswerBox(userInput)
                 Spacer(modifier = Modifier.height(40.dp))
-                AnswerCard(viewModel.previousWord.value, viewModel.wasCorrect.value)
+
+                Row(
+                    modifier = Modifier.height(150.dp)
+                ) {
+                    if(viewModel.inCorrectHistory.value.isNotEmpty()) HistoryCards(viewModel.inCorrectHistory.value)
+                    AnswerCard(viewModel.previousWord.value, viewModel.wasCorrect.value)
+                }
             } else {
                 Text(
                     text = "Quiz Complete!",

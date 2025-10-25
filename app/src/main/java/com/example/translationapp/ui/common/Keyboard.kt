@@ -27,8 +27,8 @@ fun Keyboard(
     val letterRows = listOf(
         listOf('Q','W','E','R','T','Y','U','I','O','P'),
         listOf('A','S','D','F','G','H','J','K','L'),
-        listOf('Z','X','C','V','B','N','M',','),
-        listOf('←',' ', '✓')
+        listOf('Z','X','C','V','B','N','M',',','←'),
+        listOf(' ', '✓')
     )
 
     val configuration = LocalConfiguration.current
@@ -53,8 +53,8 @@ fun Keyboard(
             ) {
                 row.forEach { key ->
                     val width = when (key) {
-                        ' ' -> keyWidth * 6.5f
-                        '←' -> keyWidth * 1.8f
+                        ' ' -> keyWidth * 9f
+//                        '←' -> keyWidth * 1.8f
                         '✓' -> keyWidth * 1.8f
                         else -> keyWidth
                     }
