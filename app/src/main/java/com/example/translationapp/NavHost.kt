@@ -53,7 +53,22 @@ fun AppNavHost(
                     mode = mode,
                     onBack = onBack,
                     onQuizClick = { quizJson ->
-                    navController.navigate("quizScreen/$quizJson")
+                        navController.navigate("quizOverViewScreen/$quizJson")
+                    }
+                )
+            }
+
+            composable(
+                route = "quizOverViewScreen/{quizJson}",
+                arguments = listOf(navArgument("quizJson") { type = NavType.StringType })
+            ) { backStackEntry ->
+                val quizJson = backStackEntry.arguments?.getString("quizJson")
+                val quiz = Gson().fromJson(quizJson, Quiz::class.java)
+                QuizOverViewScreen(
+                    quiz = quiz,
+                    onBack = onBack,
+                    onStart = { quizJson ->
+                        navController.navigate("quizScreen/$quizJson")
                     }
                 )
             }

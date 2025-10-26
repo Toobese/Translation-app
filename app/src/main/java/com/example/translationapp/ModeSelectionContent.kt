@@ -22,6 +22,7 @@ fun ModeSelectionContent(
     viewModel: QuizSelectionViewModel,
     onModeClick: (String) -> Unit
 ) {
+    viewModel.ensureJsonCopied(LocalContext.current)
     val modes = viewModel.loadModes(LocalContext.current)
 
     Column(

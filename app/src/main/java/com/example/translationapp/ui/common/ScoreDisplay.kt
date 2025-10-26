@@ -18,18 +18,10 @@ fun ScoreDisplay(
     score: Float,
     modifier: Modifier = Modifier
 ) {
-    val backgroundColor = when {
-        score >= 1.0f -> Color(0xFFB388FF)
-        score >= 0.8f -> Color(0xFF4CAF50)
-        score >= 0.5f -> Color(0xFFFFA726)
-        score == 0.0f -> Color(0xFF3A3A3A)
-        else -> Color(0xFFE53935)
-    }
-
     Box(
         modifier = modifier
             .background(
-                color = backgroundColor,
+                color = getScoreColor(score),
                 shape = RoundedCornerShape(50)
             )
             .padding(horizontal = 12.dp, vertical = 6.dp),
@@ -41,5 +33,15 @@ fun ScoreDisplay(
             fontWeight = FontWeight.Bold,
             color = Color.Black
         )
+    }
+}
+
+fun getScoreColor(score: Float): Color {
+    return when {
+        score >= 1.0f -> Color(0xFFB388FF)
+        score >= 0.8f -> Color(0xFF4CAF50)
+        score >= 0.5f -> Color(0xFFFFA726)
+        score == 0.0f -> Color(0xFF3A3A3A)
+        else -> Color(0xFFE53935)
     }
 }

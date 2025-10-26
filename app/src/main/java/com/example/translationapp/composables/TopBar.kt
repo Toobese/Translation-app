@@ -17,11 +17,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.translationapp.R
+import com.example.translationapp.ui.components.ScoreDisplay
+import com.example.translationapp.ui.components.getScoreColor
 
 @Composable
-fun TopBar(text: String, onBack: () -> Unit) {
+fun TopBar(text: String, onBack: () -> Unit, modifier: Modifier = Modifier, score: Float? = null) {
     Box(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .padding(horizontal = 24.dp),
         contentAlignment = Alignment.Center
@@ -45,5 +47,15 @@ fun TopBar(text: String, onBack: () -> Unit) {
             fontWeight = FontWeight.Bold,
             color = Color(0xFFE8D9FF)
         )
+
+        score?.let { score ->
+            Text(
+                text = "${(score * 100).toInt()}%",
+                fontSize = 30.sp,
+                fontWeight = FontWeight.Bold,
+                color = getScoreColor(score),
+                modifier = Modifier.align(Alignment.CenterEnd)
+            )
+        }
     }
 }

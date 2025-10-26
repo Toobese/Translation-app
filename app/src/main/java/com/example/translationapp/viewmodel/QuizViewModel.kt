@@ -16,7 +16,7 @@ class QuizViewModel(quiz: Quiz) : ViewModel() {
     var totalCount = allWords.size
     var currentWord = mutableStateOf<Word?>(null)
     var previousWord = mutableStateOf<Word?>(null)
-    var inCorrectHistory = mutableStateOf<List<Word>>(emptyList())
+    var inCorrectHistory = mutableStateOf<Map<String, Word>>(emptyMap())
     var wasCorrect = mutableStateOf(false)
 
     val score: Float get() = correctCount.intValue.toFloat() / (correctCount.intValue.toFloat() + inCorrectCount.intValue.toFloat())
@@ -38,7 +38,7 @@ class QuizViewModel(quiz: Quiz) : ViewModel() {
         } else {
             wasCorrect.value = false
             inCorrectCount.intValue++
-            inCorrectHistory.value += word
+            inCorrectHistory.value += (answer to word)
         }
         userInput.value = ""
         previousWord.value = currentWord.value

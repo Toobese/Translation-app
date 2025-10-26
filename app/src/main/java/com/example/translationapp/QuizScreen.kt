@@ -32,7 +32,7 @@ fun QuizScreen(quiz: Quiz, onBack: () -> Unit) {
         verticalArrangement = Arrangement.Top,
     ) {
         Spacer(modifier = Modifier.height(48.dp))
-        TopBar(text = quiz.name, onBack = onBack)
+        TopBar(text = quiz.name, onBack = onBack, score = viewModel.score)
         Column(
             modifier = Modifier
                 .fillMaxWidth()
