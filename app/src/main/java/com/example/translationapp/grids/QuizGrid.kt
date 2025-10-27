@@ -12,19 +12,23 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.translationapp.R
 import com.example.translationapp.ui.components.ScoreDisplay
 import com.google.gson.Gson
 
@@ -60,15 +64,23 @@ fun QuizGrid(
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Icon(
+                            painter = painterResource(R.drawable.edit),
+                            contentDescription = "inCorrectHistory",
+                            tint = Color(0xFFEDE7F6),
+                            modifier = Modifier.size(30.dp)
+                        )
                     Column(
                         verticalArrangement = Arrangement.SpaceBetween
                     ) {
-                        Text(
-                            text = quiz.name.uppercase(),
-                            fontSize = 27.sp,
-                            fontWeight = FontWeight.Bold,
-                            color = Color(0xFFEDE7F6)
-                        )
+                            Text(
+                                text = quiz.name.uppercase(),
+                                fontSize = 27.sp,
+                                fontWeight = FontWeight.Bold,
+                                color = Color(0xFFEDE7F6)
+                            )
+
 
                         Text(
                             text = "${quiz.wordList.size} words",
@@ -76,6 +88,7 @@ fun QuizGrid(
                             color = Color(0xFFB0AEB6)
                         )
                     }
+                        }
                     ScoreDisplay(quiz.highScore)
                 }
             }

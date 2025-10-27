@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -26,6 +27,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.translationapp.composables.EditCard
 import com.example.translationapp.domain.model.Quiz
 import com.example.translationapp.domain.model.Word
 
@@ -35,7 +37,8 @@ fun AnswerQuestionGrid(
     onSave: (List<Word>, Context) -> Unit
 ) {
     val context = LocalContext.current
-    var words by remember { mutableStateOf(quiz.wordList) }
+    var words by remember { mutableStateOf(quiz.wordList + Word("", "", "", "")) }
+//    words += Word("", "", "", "")
 
     Surface(
         modifier = Modifier
@@ -56,25 +59,14 @@ fun AnswerQuestionGrid(
             )
         }
     }
-
-    LazyVerticalGrid(
-        columns = GridCells.Fixed(1),
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp),
-        verticalArrangement = Arrangement.spacedBy(12.dp),
-        horizontalArrangement = Arrangement.spacedBy(12.dp)
-    ) {
-        itemsIndexed(words) { index, word ->
-            WordGrid(
-                word = word,
-                onWordChange = {
-                    updatedWord ->
-                        words = words.toMutableList().also { it[index] = updatedWord }
-                }
-            )
+    Spacer(modifier = Modifier.height(12.dp))
+    EditCard(
+        word = Word("", "", "", ""),
+        onWordChange = {
+                updatedWord ->
+            words = words.toMutableList().also { it[words.size - 1] = updatedWord }
         }
-    }
+    )
 
-
+    TinyWordGrid(words)
 }

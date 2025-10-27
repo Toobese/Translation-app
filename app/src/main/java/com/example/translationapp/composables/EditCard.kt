@@ -1,8 +1,7 @@
-package com.example.translationapp.grids
+package com.example.translationapp.composables
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
@@ -14,11 +13,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.example.translationapp.composables.EditBox
 import com.example.translationapp.domain.model.Word
 
 @Composable
-fun WordGrid(word: Word, onWordChange: (Word) -> Unit) {
+fun EditCard(word: Word, onWordChange: (Word) -> Unit) {
     Surface(
         modifier = Modifier
             .fillMaxWidth()
@@ -26,7 +24,7 @@ fun WordGrid(word: Word, onWordChange: (Word) -> Unit) {
             .padding(horizontal = 8.dp),
         shape = RoundedCornerShape(20.dp),
         color = Color(0xFF1E1E1E),
-        border = BorderStroke(1.dp, Color(0xFFB388FF))
+        border = BorderStroke(1.dp, Color(0xFF2C2C2C))
     ) {
         Column(
             modifier = Modifier
