@@ -52,8 +52,11 @@ fun AppNavHost(
                 QuizSelectionScreen(
                     mode = mode,
                     onBack = onBack,
-                    onQuizClick = { quizJson ->
+                    onEditQuiz = { quizJson ->
                         navController.navigate("quizOverViewScreen/$quizJson")
+                    },
+                    onQuizClick = { quizJson ->
+                        navController.navigate("quizScreen/$quizJson")
                     }
                 )
             }
@@ -67,9 +70,6 @@ fun AppNavHost(
                 QuizOverViewScreen(
                     quiz = quiz,
                     onBack = onBack,
-                    onStart = { quizJson ->
-                        navController.navigate("quizScreen/$quizJson")
-                    }
                 )
             }
 

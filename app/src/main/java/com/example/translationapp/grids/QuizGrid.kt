@@ -36,6 +36,7 @@ import com.google.gson.Gson
 fun QuizGrid(
     quizzes: List<Quiz>,
     onQuizClick: (String) -> Unit,
+    onEditQuiz: (String) -> Unit
 ) {
     LazyVerticalGrid(
         columns = GridCells.Fixed(1),
@@ -64,12 +65,16 @@ fun QuizGrid(
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
-                    Row(verticalAlignment = Alignment.CenterVertically) {
+                    Row(verticalAlignment = Alignment.Top, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                         Icon(
                             painter = painterResource(R.drawable.edit),
-                            contentDescription = "inCorrectHistory",
-                            tint = Color(0xFFEDE7F6),
-                            modifier = Modifier.size(30.dp)
+                            contentDescription = "editQuiz",
+                            tint = Color(0xFFB388FF),
+                            modifier = Modifier
+                                .size(30.dp)
+                                .clickable {
+                                    val quizJson = Uri.encode(Gson().toJson(quiz))
+                                    onEditQuiz(quizJson) },
                         )
                     Column(
                         verticalArrangement = Arrangement.SpaceBetween

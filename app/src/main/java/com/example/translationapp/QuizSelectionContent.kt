@@ -14,7 +14,7 @@ import com.example.translationapp.domain.model.Mode
 import com.example.translationapp.grids.QuizGrid
 
 @Composable
-fun QuizSelectionScreen(mode: Mode, onBack: () -> Unit, onQuizClick: (String) -> Unit) {
+fun QuizSelectionScreen(mode: Mode, onBack: () -> Unit, onQuizClick: (String) -> Unit, onEditQuiz: (String) -> Unit) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -25,6 +25,6 @@ fun QuizSelectionScreen(mode: Mode, onBack: () -> Unit, onQuizClick: (String) ->
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        QuizGrid(quizzes = mode.quizzes, onQuizClick = onQuizClick)
+        QuizGrid(quizzes = mode.quizzes, onQuizClick = onQuizClick, onEditQuiz = onEditQuiz)
     }
 }

@@ -8,23 +8,27 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.translationapp.R
 import com.example.translationapp.domain.model.Word
 
 @Composable
-fun TinyWordGrid(words: List<Word>) {
+fun TinyWordGrid(words: List<Word>, onWordClick: (Word) -> Unit, onCreateWord: () -> Unit) {
     LazyVerticalGrid(
         columns = GridCells.Fixed(4),
         modifier = Modifier
@@ -34,13 +38,17 @@ fun TinyWordGrid(words: List<Word>) {
         horizontalArrangement = Arrangement.spacedBy(12.dp)
     ) {
         itemsIndexed(words) { index, word ->
-            TinyWord(word)
+            TinyWord(word, onWordClick)
+        }
+
+        item {
+            AddNewWord(onCreateWord)
         }
     }
 }
 
 @Composable
-fun TinyWord(word: Word) {
+fun TinyWord(word: Word, onWordClick: (Word) -> Unit) {
     Surface(
         modifier = Modifier
             .fillMaxWidth()
@@ -50,7 +58,7 @@ fun TinyWord(word: Word) {
         border = BorderStroke(1.dp, Color(0xFF2C2C2C))
     ) {
         Box(
-            modifier = Modifier.fillMaxSize().clickable { },
+            modifier = Modifier.fillMaxSize().clickable { onWordClick(word) },
             contentAlignment = Alignment.Center
         ) {
             Text(
@@ -58,6 +66,30 @@ fun TinyWord(word: Word) {
                 fontSize = 40.sp,
                 fontWeight = FontWeight.Bold,
                 color = Color(0xFFEDE7F6)
+            )
+        }
+    }
+}
+
+@Composable
+fun AddNewWord(onCreateWord: () -> Unit) {
+    Surface(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(95.dp),
+        shape = RoundedCornerShape(10.dp),
+        color = Color(0xFF1E1E1E),
+        border = BorderStroke(1.dp, Color(0xFF2C2C2C))
+    ) {
+        Box(
+            modifier = Modifier.fillMaxSize().clickable { onCreateWord() },
+            contentAlignment = Alignment.Center
+        ) {
+            Icon(
+                painter = painterResource(id = R.drawable.plus),
+                contentDescription = "addNewWord",
+                tint = Color(0xFFB388FF),
+                modifier = Modifier.size(40.dp)
             )
         }
     }

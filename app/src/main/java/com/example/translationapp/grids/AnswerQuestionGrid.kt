@@ -34,11 +34,14 @@ import com.example.translationapp.domain.model.Word
 @Composable
 fun AnswerQuestionGrid(
     quiz: Quiz,
-    onSave: (List<Word>, Context) -> Unit
+    currentEditingWord: Word,
+    onSave: (List<Word>, Context) -> Unit,
+    onWordClick: (Word) -> Unit,
+    onUpdateCurrentEditingWord: (Word) -> Unit,
+    onCreateWord: () -> Unit,
 ) {
     val context = LocalContext.current
-    var words by remember { mutableStateOf(quiz.wordList + Word("", "", "", "")) }
-//    words += Word("", "", "", "")
+    var words by remember { mutableStateOf(quiz.wordList) }
 
     Surface(
         modifier = Modifier
@@ -61,12 +64,14 @@ fun AnswerQuestionGrid(
     }
     Spacer(modifier = Modifier.height(12.dp))
     EditCard(
-        word = Word("", "", "", ""),
-        onWordChange = {
-                updatedWord ->
-            words = words.toMutableList().also { it[words.size - 1] = updatedWord }
-        }
+        word = currentEditingWord,
+        onWordChange = { updatedWord ->
+            words = words.map { word ->
+                if (word.question == currentEditingWord.question || word.answer == updatedWord.answer || word.mnemonic == updatedWord.mnemonic) updatedWord else word
+            }
+            onUpdateCurrentEditingWord(updatedWord)
+        },
     )
 
-    TinyWordGrid(words)
+    TinyWordGrid(words, onWordClick = onWordClick, onCreateWord = onCreateWord)
 }
