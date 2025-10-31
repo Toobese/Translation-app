@@ -17,9 +17,9 @@ class QuizOverViewViewModel(initialQuiz: Quiz) : ViewModel() {
     private val gson = Gson()
 
     var quiz by mutableStateOf(initialQuiz)
-    var currentEditingWord by mutableStateOf<Word>(quiz.wordList.first())
+    var currentEditingWord by mutableStateOf(quiz.wordList.first())
 
-    fun onSave(updatedWords: List<Word>, context: Context) {
+    fun onSave(context: Context) {
         val file = File(context.filesDir, "kanji.json")
 
         val reader = InputStreamReader(file.inputStream())
@@ -31,7 +31,7 @@ class QuizOverViewViewModel(initialQuiz: Quiz) : ViewModel() {
         } ?: return
 
         val quizToUpdate = mode.quizzes.find { it.name == quiz.name } ?: return
-        quizToUpdate.wordList = updatedWords.toMutableList()
+        quizToUpdate.wordList = quiz.wordList.toMutableList()
         file.writeText(gson.toJson(appData))
         reloadQuiz(context)
     }
@@ -51,10 +51,8 @@ class QuizOverViewViewModel(initialQuiz: Quiz) : ViewModel() {
         quiz = newQuiz
     }
 
-    fun onCreateWord() {
-        Log.d("hey", "wefafegr")
-        quiz = quiz.copy(wordList = quiz.wordList + Word("", "", "", ""))
-    }
+    fun onCreateWord() { quiz = quiz.copy(wordList = quiz.wordList + Word("", "", "", "")) }
     fun onWordClick(word: Word) { currentEditingWord = word }
     fun onUpdateCurrentEditingWord(word: Word) { currentEditingWord = word }
+    fun onUpdateQuizWordList(wordList: List<Word>) { quiz = quiz.copy(wordList = wordList) }
 }
