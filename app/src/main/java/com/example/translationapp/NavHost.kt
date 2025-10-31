@@ -52,6 +52,7 @@ fun AppNavHost(
                 QuizSelectionScreen(
                     mode = mode,
                     onBack = onBack,
+                    onLoad = viewModel::loadModes,
                     onEditQuiz = { quizJson ->
                         navController.navigate("quizOverViewScreen/$quizJson")
                     },

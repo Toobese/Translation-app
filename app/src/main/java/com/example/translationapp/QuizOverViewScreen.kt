@@ -19,7 +19,7 @@ import com.example.translationapp.viewmodel.QuizOverViewViewModel
 @Composable
 fun QuizOverViewScreen(quiz: Quiz, onBack: () -> Unit) {
     val viewModel = remember { QuizOverViewViewModel(quiz) }
-    viewModel.reloadQuiz(LocalContext.current)
+//    viewModel.reloadQuiz(LocalContext.current)
 
     Column(
         modifier = Modifier
@@ -32,8 +32,8 @@ fun QuizOverViewScreen(quiz: Quiz, onBack: () -> Unit) {
         Spacer(modifier = Modifier.height(16.dp))
 
         AnswerQuestionGrid(
-            quiz = quiz,
-            currentEditingWord = viewModel.currentEditingWord.value,
+            quiz = viewModel.quiz,
+            currentEditingWord = viewModel.currentEditingWord,
             onSave = viewModel::onSave,
             onWordClick = viewModel::onWordClick,
             onUpdateCurrentEditingWord = viewModel::onUpdateCurrentEditingWord,

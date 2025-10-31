@@ -1,6 +1,7 @@
 package com.example.translationapp.viewmodel
 
 import android.content.Context
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.example.translationapp.domain.model.Mode
 import com.google.gson.Gson
